@@ -65,17 +65,18 @@ function botResponse(clientMessage, msgNumber, currentSelction) {
     })
   }
   else if (msgNumber == 3) {
+    debugger;
     holiday.map(function (o, c) {
       var msg = clientMessage.text;
-      if (msg >= 20 && o.tempRating == "hot") {
+      if (msg.toLowerCase() == "20+" && o.tempRating == "hot") {
         newHoliday.push(o)
-      } else if ((msg >= 10 && msg < 20) && o.tempRating == "mild") {
+      } else if ((msg.toLowerCase() == "10-19") && o.tempRating == "mild") {
         newHoliday.push(o)
-      } else if (msg < 10 && o.tempRating == "cold") {
+      } else if (msg.toLowerCase() == "less than 9" && o.tempRating == "cold") {
         newHoliday.push(o)
       }
     })
-
+    if(newHoliday.length ==0) newHoliday = holiday
     response.text = `The holidays most suitable to your needs would be: ${newHoliday.map(function (o) {
       return `\n
         Name and Location: ${o.hotelName} | ${o.city} | ${o.continent}\n
